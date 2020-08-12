@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 
-class Dishdetail extends Component{
-    constructor(props){
-        super(props);
-    }
-    renderDish(dish){
+// Functional components always begin with capital letter 
+    function RenderDish({dish}){
         if (dish != null){
             return(
                 <div key={dish.id} className='col-12 col-md-5 m-1'>
@@ -26,7 +23,7 @@ class Dishdetail extends Component{
             )
         }
     }
-    renderComments(dish){
+    function RenderComments({dish}){
         if (dish != null){
             var comments = dish.comments.map((comment)=>{
                 var date = new Date(comment.date)
@@ -56,16 +53,15 @@ class Dishdetail extends Component{
             )
         }
     }
-    render (){
-        return (
-            <div className='container'>
-                <div className='row'>
-                    {this.renderDish(this.props.dish)}
-                    {this.renderComments(this.props.dish)}
-                </div>
-            </div>  
-        );
-    } 
+const Dishdetail = (props) => {
+    return (
+        <div className='container'>
+            <div className='row'>
+                <RenderDish dish={props.dish}/>
+                <RenderComments dish={props.dish}/> 
+            </div>
+        </div>  
+    );
 }
 
 export default Dishdetail;
